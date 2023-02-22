@@ -4,15 +4,15 @@
 
 public class ArrayStack {
 	
-	private char[] line;
+	private Character[] line;
 	private int charIndex;
 	
 	public ArrayStack() {
-		this.line = new char[1];
+		this.line = new Character[1];
 		this.charIndex = -1;
 	}
 	
-	public void push(char character) { // pushes
+	public void push(Character character) { // pushes
 		if (this.size() >= this.line.length - 1) { // stack would be full if added
 			this.line = doubleIt();
 		}
@@ -20,25 +20,25 @@ public class ArrayStack {
 		return;
 	}
 	
-	private char[] doubleIt() {
+	private Character[] doubleIt() {
 		int newLength = line.length * 2; // doubles length of that SPECIFIC row
-		char[] longerArray = new char[newLength]; // creates new array
+		Character[] longerArray = new Character[newLength]; // creates new array
 		for (int i = 0; i < line.length; i++) {
 			longerArray[i] = line[i]; // copy old array into new one
 		}
 		return longerArray; // return new
 	}
 	
-	public char pop() { // pops
+	public Character pop() { // pops
 		if (this.charIndex == -1) {
 			return null;
 		}
-		char popped = line[this.charIndex];
+		Character popped = line[this.charIndex];
 		line[this.charIndex--] = null;
 		return popped;
 	}
 	
-	public char peek() {
+	public Character peek() {
 		if (this.charIndex == -1) {
 			return null;
 		}
