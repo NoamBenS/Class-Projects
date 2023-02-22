@@ -4,42 +4,48 @@
 
 public class ArrayStack {
 	
-	private char[] lines;
-	private int charNumber;
+	private char[] line;
+	private int charIndex;
 	
 	public ArrayStack() {
-		this.lines = new char[1];
-		this.charNumber = 0;
+		this.line = new char[1];
+		this.charIndex = -1;
 	}
 	
 	public void push(char character) { // pushes
-		if (charNumber + 1 >= this.lines.length) { // stack would be full if added
-			this.lines = doubleIt();
+		if (this.size() >= this.line.length - 1) { // stack would be full if added
+			this.line = doubleIt();
 		}
-		this.lines[++charNumber] = character; // stack would NOT be full if added, or else was already doubled (in the case it was caught above)
+		this.line[++charIndex] = character; // stack would NOT be full if added, or else was already doubled (in the case it was caught above)
 		return;
 	}
 	
 	private char[] doubleIt() {
-		int newLength = lines.length * 2; // doubles length of that SPECIFIC row
+		int newLength = line.length * 2; // doubles length of that SPECIFIC row
 		char[] longerArray = new char[newLength]; // creates new array
-		for (int i = 0; i < lines.length; i++) {
-			longerArray[i] = lines[i]; // copy old array into new one
+		for (int i = 0; i < line.length; i++) {
+			longerArray[i] = line[i]; // copy old array into new one
 		}
 		return longerArray; // return new
 	}
 	
 	public char pop() { // pops
-		char popped = lines[this.charNumber];
-		lines[this.charNumber--] = null;
+		if (this.charIndex == -1) {
+			return null;
+		}
+		char popped = line[this.charIndex];
+		line[this.charIndex--] = null;
 		return popped;
 	}
 	
 	public char peek() {
-		return lines[charNumber];
+		if (this.charIndex == -1) {
+			return null;
+		}
+		return line[charIndex];
 	}
 	
 	public int size() {
-		return this.charNumber;
+		return this.charIndex + 1;
 	}
 }
