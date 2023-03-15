@@ -7,6 +7,17 @@ public class BinarySearchTree<E> {
         return max(node.getRightChild());
     }
 
+    public void inOrder(BinaryTreeNode node){
+        BinaryTreeNode left = node.getLeftChild();
+        if(left != null){
+        inOrder(left);
+        }
+        System.out.println("Visited: " + node.data);
+        BinaryTreeNode right = node.getRightChild();
+        if(right != null){
+        inOrder(right);
+        }
+        }
 
     public E get(BinaryTreeNode<E> startFrom, Comparable key){
         if(startFrom == null){
@@ -52,7 +63,7 @@ public class BinarySearchTree<E> {
         }
 
     public BinaryTreeNode<E> getSuccessor(BinaryTreeNode node) {
-        return node;
+        if 
     }
 
     public BinaryTreeNode<E> min(BinaryTreeNode<E> node){
