@@ -1,4 +1,4 @@
-public class BinarySearchTree {
+public class BinarySearchTree<E> {
 
     public BinaryTreeNode<E> max(BinaryTreeNode<E> node){
         if(node.getRightChild() == null){
@@ -58,13 +58,17 @@ public class BinarySearchTree {
         private BinaryTreeNode node;
         private BinaryTreeNode left;
         private BinaryTreeNode right;
-        private Comparable key;
-        private E value;
+        private E key;
+        private Object value;
 
-        BinaryTreeNode(BinaryTreeNode<E> node, Comparable Key, E value) {
+        BinaryTreeNode(BinaryTreeNode<E> node, E Key, Object value) {
             this.node = node;
             this.key = key;
             this.value = value;
+        }
+
+        public E getData() {
+            return null;
         }
 
         public void setValue(E value) {
