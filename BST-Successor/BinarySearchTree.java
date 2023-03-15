@@ -63,7 +63,7 @@ public class BinarySearchTree<E> {
     }
 
     public BinaryTreeNode<E> nthSmallest(BinaryTreeNode<E> node, int n) {
-        nthSmallestHelper(min(node));
+        return nthSmallestHelper(min(node), n);
     }
 
     public BinaryTreeNode<E> nthSmallestHelper(BinaryTreeNode<E> node, int n) {
