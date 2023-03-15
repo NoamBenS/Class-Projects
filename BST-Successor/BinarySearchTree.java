@@ -51,19 +51,45 @@ public class BinarySearchTree {
         return node;
         }
 
-    public E getSuccessor(BinaryTreeNode node) {
+    public BinaryTreeNode<E> getSuccessor(BinaryTreeNode node) {
         return node;
     }
 
     private class BinaryTreeNode<E> {
+        private BinaryTreeNode node;
         private BinaryTreeNode left;
         private BinaryTreeNode right;
         private Comparable key;
         private E value;
 
-        BinaryTreeNode(Comparable Key, E value) {
+        BinaryTreeNode(BinaryTreeNode<E> node, Comparable Key, E value) {
+            this.node = node;
             this.key = key;
             this.value = value;
+        }
+
+        public void setValue(E value) {
+            this.value = value;
+        }
+
+        public void setRightChild(BinaryTreeNode<E> right) {
+            this.right = right;
+        }
+
+        public BinaryTreeNode<E> getRightChild() {
+            return this.right;
+        }
+
+        public void setLeftChild(BinaryTreeNode<E> left) {
+            this.left = left;
+        }
+
+        public BinaryTreeNode<E> getLeftChild() {
+            return this.left;
+        }
+
+        public Object getKey() {
+            return this.key;
         }
 
     }
