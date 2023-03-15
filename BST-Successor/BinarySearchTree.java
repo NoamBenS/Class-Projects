@@ -7,6 +7,13 @@ public class BinarySearchTree {
         return max(node.getRightChild());
     }
 
+    public BinaryTreeNode<E> min(BinaryTreeNode<E> node){
+        if(node.getLeftChild() == null){
+        return node;
+        }
+        return min(node.LeftChild());
+    }
+
     public E get(BinaryTreeNode<E> startFrom, Comparable key){
         if(startFrom == null){
             return null;
@@ -65,6 +72,17 @@ public class BinarySearchTree {
             this.value = value;
         }
 
+    }
+
+    public BinaryTreeNode<E> nthSmallest(BinaryTreeNode<E> node, int n) {
+        nthSmallestHelper(min(node));
+    }
+
+    public BinaryTreeNode<E> nthSmallestHelper(BinaryTreeNode<E> node, int n) {
+        if (n <= 1) {
+            return node;
+        }
+        return nthSmallestHelper(getSuccessor(node), n-1);
     }
 
 }
