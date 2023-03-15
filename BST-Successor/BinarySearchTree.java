@@ -1,5 +1,10 @@
 public class BinarySearchTree<E> {
 
+    private BinaryTreeNode<E> head;
+
+    public BinarySearchTree() {
+    }
+
     public BinaryTreeNode<E> max(BinaryTreeNode<E> node){
         if(node.getRightChild() == null){
         return node;
@@ -50,19 +55,39 @@ public class BinarySearchTree<E> {
         return node;
         }
 
-    public BinaryTreeNode<E> getSuccessor(BinaryTreeNode node) {
-        return node;
+    public BinaryTreeNode<E> getSuccessor(BinaryTreeNode<E> node) {
+        BinaryTreeNode<E> currentNode = node;
+        // if has right subtree, go to leftmost node
+        if (currentNode.getRightChild() != null) {
+            currentNode = currentNode.getRightChild();
+            while (currentNode.getLeftChild() != null) {
+                currentNode = currentNode.getLeftChild();
+            }
+            return currentNode;
+        }
+        // if no right subtree, iterate until you find the first right ancestor
+        BinaryTreeNode<E> previousNode = currentNode;
+        currentNode = currentNode.getParent();
+        while (currentNode.getParent() != null && currentNode.getLeftChild() != previousNode) {
+            previousNode = currentNode;
+            currentNode = currentNode.getParent();
+        }
+        if (currentNode.getParent() != null) {
+            return currentNode.getLeftChild();
+        }
+        // NO successor
+        return null;
     }
 
     private class BinaryTreeNode<E> {
-        private BinaryTreeNode node;
-        private BinaryTreeNode left;
-        private BinaryTreeNode right;
+        private BinaryTreeNode<E> parent;
+        private BinaryTreeNode<E> left;
+        private BinaryTreeNode<E> right;
         private E key;
         private Object value;
 
         BinaryTreeNode(BinaryTreeNode<E> node, E Key, Object value) {
-            this.node = node;
+            this.parent = node;
             this.key = key;
             this.value = value;
         }
@@ -95,6 +120,9 @@ public class BinarySearchTree<E> {
             return this.key;
         }
 
+        public BinaryTreeNode<E> getParent() {
+            return this.parent;
+        }
     }
 
 }
