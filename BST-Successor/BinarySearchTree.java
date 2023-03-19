@@ -67,7 +67,6 @@ public class BinarySearchTree<E> {
         return node;
         }
 
-<<<<<<< HEAD
     public BinaryTreeNode<E> getSuccessor(BinaryTreeNode<E> node) {
         BinaryTreeNode<E> currentNode = node;
         // if has right subtree, go to leftmost node
@@ -90,28 +89,6 @@ public class BinarySearchTree<E> {
         }
         // NO successor
         return null;
-=======
-    public BinaryTreeNode<E> getSuccessor(BinaryTreeNode node) {
-        if 
-    }
-
-    public BinaryTreeNode<E> min(BinaryTreeNode<E> node){
-        if(node.getLeftChild() == null){
-        return node;
-        }
-        return min(node.LeftChild());
-    }
-
-    public BinaryTreeNode<E> nthSmallest(BinaryTreeNode<E> node, int n) {
-        return nthSmallestHelper(min(node), n);
-    }
-
-    public BinaryTreeNode<E> nthSmallestHelper(BinaryTreeNode<E> node, int n) {
-        if (n <= 1) {
-            return node;
-        }
-        return nthSmallestHelper(getSuccessor(node), n-1);
->>>>>>> 533233a48e3519f2e7365cd167b6f5650ab298cc
     }
 
     private class BinaryTreeNode<E> {
