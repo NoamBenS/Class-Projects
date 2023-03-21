@@ -12,18 +12,6 @@ public class BinarySearchTree<E> {
         return max(node.getRightChild());
     }
 
-    public void inOrder(BinaryTreeNode node){
-        BinaryTreeNode left = node.getLeftChild();
-        if(left != null){
-        inOrder(left);
-        }
-        System.out.println("Visited: " + node.data);
-        BinaryTreeNode right = node.getRightChild();
-        if(right != null){
-        inOrder(right);
-        }
-        }
-
     public E get(BinaryTreeNode<E> startFrom, Comparable key){
         if(startFrom == null){
             return null;
@@ -67,9 +55,12 @@ public class BinarySearchTree<E> {
         return node;
         }
 
+
+
+
     public BinaryTreeNode<E> getSuccessor(BinaryTreeNode<E> node) {
         BinaryTreeNode<E> currentNode = node;
-        // if has right subtree, go to leftmost node
+        // if has right subtree, go to leftmost node on right subtree
         if (currentNode.getRightChild() != null) {
             currentNode = currentNode.getRightChild();
             while (currentNode.getLeftChild() != null) {
@@ -90,6 +81,9 @@ public class BinarySearchTree<E> {
         // NO successor
         return null;
     }
+
+
+
 
     private class BinaryTreeNode<E> {
         private BinaryTreeNode<E> parent;
