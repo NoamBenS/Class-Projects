@@ -4,20 +4,44 @@ import random
 
 
 def simulate_epidemic(G, seed, t, p):
-    infectedGraph = G
-    infected = set()
+    if seed == 0:
+        return 0
+    if t == 0:
+        return len(seed)
+    infected = []
+    totalInfected = []
+    infectedLength = []
+    recovered = []
     for i in seed:
-        q = G[random.random() * (len(G) - 1)]
-        if infected.__contains__(q):
-            i -= 1
-        infected.add(q)
-
-    rand = float(random.random())
-    float(p)
-    if (rand <= p and i==1):
-        #this
-
-    return 1
+        infected.append(G[i])
+        totalInfected.append(G[i])
+        infectedIndividual = [G[i], int(t)]
+        infectedLength.append(infectedIndividual)
+    #simulate reinfections
+    while len(infected) > 0:
+        for i in range(len(infected)):
+            for j in range(len(G)):
+                if (random.random() <= float(p) and G[i][j] == 1):#given the infectious percentage and if there is a connection
+                    if (not infected.__contains__(G[j])) and (not recovered.__contains__(G[j])):
+                        infected.append(G[j]) # add element to infected list
+                        totalInfected.append(G[j])
+                        infectedIndividual = [G[j], int(t)]
+                        infectedLength.append(infectedIndividual)
+        amountOfTimes = len(infected)
+        for k in range(amountOfTimes): #update t for everything
+            try:
+                newTime = infectedLength[k][1]
+            except:
+                print("sorry")
+            newTime -= 1
+            if (newTime > 0):
+                infectedLength[k][1] = newTime
+            else:
+                infected.remove(infectedLength[k][0])
+                infectedLength.remove([infectedLength[k][0], newTime + 1])
+                recovered.append(G[k])
+                k -= 1
+    return len(totalInfected)
     # returns one thing: the # of infected
 
 
@@ -36,8 +60,6 @@ def generate_random_graph(n, p):
                 if (rand <= p):
                     ls[i][j] = 1
                     ls[j][i] = 1
-    for i in range(n):
-        print(ls[i])
     return ls
 
 
@@ -53,7 +75,7 @@ def average_plots():
             infected = 0  # set variables to 0
             healthy = 0
             for k in range(100):  # run this next part 100 times
-                infected += simulate_epidemic(n, {1}, 1, p2)  # run this epidemic thing and add the value to the infected
+                infected += simulate_epidemic(n, {1}, 1, p2[j])  # run this epidemic thing and add the value to the infected
                 healthy += 10 - infected
             infected_avg = infected / 100  # get avg
             healthy_avg = healthy / 100  # get avg
@@ -65,5 +87,5 @@ def average_plots():
     plt.show()
     return
 
-generate_random_graph(10, .2)
-#average_plots()
+#generate_random_graph(10, .2)
+average_plots()
